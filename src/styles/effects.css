@@ -1,0 +1,252 @@
+/* =============================================================
+   Effects — pointer spotlight, text reveals, marquee, back-to-top
+   All motion here collapses under prefers-reduced-motion (see the
+   global guard in animations.css plus the overrides at the end).
+   ============================================================= */
+
+/* ---------- Word-by-word text reveal ---------- */
+
+.split {
+  display: inline;
+}
+
+.split__word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  /* Room for descenders (g, y, p) without shifting the line box */
+  padding-bottom: 0.18em;
+  margin-bottom: -0.18em;
+}
+
+.split__inner {
+  display: inline-block;
+  transform: translateY(115%);
+  opacity: 0;
+  transition:
+    transform 900ms var(--ease-out),
+    opacity 680ms var(--ease-out);
+  transition-delay: var(--d, 0ms);
+  will-change: transform, opacity;
+}
+
+.split.is-inview .split__inner {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ---------- Rotating role text ---------- */
+
+.role-rotator {
+  position: relative;
+  display: inline-block;
+  height: 1.35em;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.role-rotator__item {
+  display: inline-block;
+  white-space: nowrap;
+  animation: role-in 620ms var(--ease-out) both;
+}
+
+@keyframes role-in {
+  from {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+}
+
+/* ---------- Animated gradient text ---------- */
+
+.grad-text--shine {
+  background-size: 220% auto;
+  animation: text-shine 8s linear infinite;
+}
+
+@keyframes text-shine {
+  to {
+    background-position: 220% center;
+  }
+}
+
+/* ---------- Technology marquee ---------- */
+
+.marquee-strip {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  padding-block: 0.95rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-elev);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+  will-change: transform;
+}
+
+.marquee-strip:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+.marquee__group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 2.4rem;
+  padding-right: 2.4rem;
+}
+
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--muted);
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.marquee__item:hover {
+  color: var(--text-strong);
+}
+
+.marquee__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--lav-400);
+  box-shadow: 0 0 10px var(--lav-400);
+  animation: pulse-glow 2.6s var(--ease-in-out) infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- Back to top ---------- */
+
+.back-to-top {
+  position: fixed;
+  right: clamp(1rem, 2vw, 1.75rem);
+  bottom: clamp(1rem, 2vw, 1.75rem);
+  z-index: 110;
+  display: grid;
+  place-items: center;
+  width: 3.1rem;
+  height: 3.1rem;
+  padding: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--surface-strong) 88%, transparent);
+  color: var(--text-strong);
+  cursor: pointer;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(1rem) scale(0.9);
+  pointer-events: none;
+  transition:
+    opacity var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.back-to-top:hover {
+  color: var(--accent-text);
+  border-color: var(--accent-text);
+  box-shadow: var(--shadow-glow);
+}
+
+.back-to-top:active {
+  transform: translateY(0) scale(0.94);
+}
+
+.back-to-top__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.back-to-top__ring circle {
+  fill: none;
+  stroke-width: 2;
+}
+
+.back-to-top__ring-track {
+  stroke: var(--border);
+}
+
+.back-to-top__ring-bar {
+  stroke-linecap: round;
+  transition: stroke-dashoffset 160ms linear;
+}
+
+.back-to-top__arrow {
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.back-to-top:hover .back-to-top__arrow {
+  transform: translateY(-2px);
+}
+
+/* ---------- Scroll parallax ---------- */
+/* The offset is written to --parallax-y by useParallax. Using the
+   individual `translate` property keeps each element's own transform
+   and keyframe animations intact. */
+[data-parallax] {
+  translate: 0 var(--parallax-y, 0px);
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .split__inner {
+    transform: none;
+    opacity: 1;
+  }
+
+  .role-rotator__item,
+  .grad-text--shine,
+  .marquee__track {
+    animation: none;
+  }
+
+  .marquee__track {
+    transform: none;
+  }
+
+  [data-parallax] {
+    translate: none;
+  }
+}

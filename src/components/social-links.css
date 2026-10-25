@@ -1,0 +1,47 @@
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.85rem;
+  padding: 0.6rem 1.05rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--bg-elev);
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  transition: color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out), transform var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+
+.social-link:hover {
+  color: var(--text-strong);
+  border-color: var(--border-strong);
+  background: var(--grad-accent-soft);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px -20px rgba(123, 160, 218, 0.4);
+}
+
+.social-link__icon {
+  display: grid;
+  place-items: center;
+  color: var(--accent-text);
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.social-link:hover .social-link__icon {
+  transform: scale(1.12);
+}
+
+.social-links--compact .social-link {
+  padding-inline: 0.8rem;
+}

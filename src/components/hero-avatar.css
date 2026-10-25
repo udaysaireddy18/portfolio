@@ -1,0 +1,496 @@
+/* =============================================================
+   Hero avatar — full-body boy character
+   Layered motion: cinematic entrance, idle float, hair sway,
+   responsive shadow, randomised blink, wave + irregular lip-sync.
+   ============================================================= */
+
+.avatar {
+  display: grid;
+  justify-items: center;
+  gap: 1.1rem;
+  margin: 0;
+}
+
+.avatar__frame {
+  position: relative;
+  width: clamp(11rem, 24vw, 17rem);
+  display: grid;
+  place-items: center;
+}
+
+.avatar__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Rotating dashed aura behind the figure */
+.boy__aura {
+  fill: none;
+  stroke: var(--border-strong);
+  stroke-width: 1;
+  stroke-dasharray: 2 10;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: aura-spin 46s linear infinite;
+}
+
+@keyframes aura-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.boy__glow {
+  opacity: 0.85;
+  transition: opacity var(--dur) var(--ease-out);
+}
+
+.avatar.is-talking .boy__glow {
+  animation: aura-pulse 2.4s var(--ease-in-out) infinite;
+}
+
+@keyframes aura-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---------- Materials ---------- */
+
+.boy__skin {
+  fill: url(#boy-skin);
+}
+
+.boy__limb {
+  fill: none;
+  stroke: url(#boy-skin);
+  stroke-width: 15;
+  stroke-linecap: round;
+}
+
+.boy__hand {
+  fill: url(#boy-skin);
+}
+
+.boy__hair {
+  fill: url(#boy-hair);
+  transform-box: fill-box;
+  transform-origin: 50% 10%;
+  animation: hair-sway 4.4s var(--ease-in-out) infinite;
+}
+
+.boy__shirt,
+.boy__sleeve {
+  fill: url(#boy-shirt);
+}
+
+.boy__shorts {
+  fill: url(#boy-shorts);
+}
+
+.boy__sock {
+  fill: #e9eefc;
+}
+
+.boy__shoe {
+  fill: #f4f7ff;
+  stroke: rgba(120, 140, 220, 0.5);
+  stroke-width: 1.5;
+}
+
+.boy__cheek {
+  fill: rgba(255, 140, 170, 0.4);
+}
+
+/* ---------- Cinematic entrance (one-shot) ---------- */
+
+.boy__enter {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: boy-enter 900ms var(--ease-out) both;
+}
+
+@keyframes boy-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(34px) scale(0.86) rotate(-6deg);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+.boy__head-enter {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: part-pop 620ms var(--ease-out) both;
+  animation-delay: 260ms;
+}
+
+.boy__arm-enter {
+  transform-box: fill-box;
+  transform-origin: center top;
+  animation: part-pop 560ms var(--ease-out) both;
+}
+
+.boy__arm-enter--rest {
+  animation-delay: 420ms;
+}
+
+.boy__arm-enter--wave {
+  animation-delay: 500ms;
+}
+
+@keyframes part-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.7);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.boy__shadow-enter {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: shadow-in 700ms var(--ease-out) both;
+  animation-delay: 140ms;
+}
+
+@keyframes shadow-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.boy__sparkles {
+  pointer-events: none;
+}
+
+.boy__spark {
+  fill: var(--lav-300, #cbb8f0);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: sparkle 1150ms var(--ease-out) both;
+}
+
+.boy__sparkles > g:nth-child(1) .boy__spark {
+  animation-delay: 120ms;
+}
+
+.boy__sparkles > g:nth-child(2) .boy__spark {
+  animation-delay: 220ms;
+}
+
+.boy__sparkles > g:nth-child(3) .boy__spark {
+  animation-delay: 340ms;
+}
+
+.boy__sparkles > g:nth-child(4) .boy__spark {
+  animation-delay: 300ms;
+}
+
+.boy__sparkles > g:nth-child(5) .boy__spark {
+  animation-delay: 180ms;
+}
+
+.boy__sparkles > g:nth-child(6) .boy__spark {
+  animation-delay: 400ms;
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1) rotate(45deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.2) rotate(90deg);
+  }
+}
+
+/* ---------- Idle motion ---------- */
+
+/* Gentle floating bob with a barely-there sway */
+.boy__body {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: boy-float 6.4s var(--ease-in-out) infinite;
+}
+
+@keyframes boy-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-3px) rotate(0.7deg) scale(1.008);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0deg) scale(1.014);
+  }
+  75% {
+    transform: translateY(-3px) rotate(-0.7deg) scale(1.008);
+  }
+}
+
+/* Ground shadow breathes in counterpoint to the float */
+.boy__shadow {
+  fill: rgba(60, 80, 150, 0.16);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: shadow-breathe 6.4s var(--ease-in-out) infinite;
+}
+
+@keyframes shadow-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(0.82);
+    opacity: 0.55;
+  }
+}
+
+@keyframes hair-sway {
+  0%,
+  100% {
+    transform: rotate(-1.4deg);
+  }
+  50% {
+    transform: rotate(1.4deg);
+  }
+}
+
+/* Slow head bob */
+.boy__head {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: head-bob 7.5s var(--ease-in-out) infinite;
+}
+
+@keyframes head-bob {
+  0%,
+  100% {
+    transform: rotate(-1.6deg) translateY(0);
+  }
+  50% {
+    transform: rotate(1.6deg) translateY(-2px);
+  }
+}
+
+/* Friendly wave */
+.boy__arm-wave {
+  transform-box: fill-box;
+  transform-origin: 18% 82%;
+  animation: arm-wave 2.6s var(--ease-in-out) infinite;
+}
+
+@keyframes arm-wave {
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+/* ---------- Eyes ---------- */
+
+.boy__eye-white {
+  fill: #f2f6ff;
+}
+
+.boy__pupil {
+  fill: #1b2340;
+}
+
+.boy__spark-dot {
+  fill: #ffffff;
+  opacity: 0.9;
+}
+
+.boy__eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 90ms var(--ease-out);
+}
+
+.boy__eye.is-blinking {
+  transform: scaleY(0.08);
+}
+
+.boy__brow {
+  fill: none;
+  stroke: #2a3560;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.boy__nose {
+  fill: none;
+  stroke: rgba(30, 42, 80, 0.45);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+/* ---------- Lip-sync (irregular, only while talking) ---------- */
+
+.boy__mouth {
+  fill: #8a4257;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mouth-talk 560ms linear infinite;
+  animation-play-state: paused;
+}
+
+.avatar.is-talking .boy__mouth {
+  animation-play-state: running;
+}
+
+@keyframes mouth-talk {
+  0% {
+    transform: scaleY(0.55) scaleX(1.05);
+  }
+  12% {
+    transform: scaleY(1.9) scaleX(0.9);
+  }
+  24% {
+    transform: scaleY(0.7) scaleX(1.06);
+  }
+  38% {
+    transform: scaleY(2.15) scaleX(0.86);
+  }
+  52% {
+    transform: scaleY(0.85) scaleX(1.02);
+  }
+  66% {
+    transform: scaleY(1.5) scaleX(0.94);
+  }
+  80% {
+    transform: scaleY(0.65) scaleX(1.05);
+  }
+  100% {
+    transform: scaleY(0.55) scaleX(1.05);
+  }
+}
+
+/* ---------- Sound bars beside the head ---------- */
+
+.boy__bar {
+  fill: var(--lav-400);
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: wave 720ms var(--ease-in-out) infinite alternate;
+  animation-play-state: paused;
+}
+
+.avatar.is-talking .boy__bar {
+  animation-play-state: running;
+}
+
+.boy__bar:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.boy__bar:nth-child(3) {
+  animation-delay: 240ms;
+}
+
+.boy__bar:nth-child(4) {
+  animation-delay: 60ms;
+}
+
+@keyframes wave {
+  from {
+    transform: scaleY(0.35);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* ---------- Controls ---------- */
+
+.avatar__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.avatar__hint {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.04em;
+  color: var(--accent-text);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+}
+
+.avatar__hint.is-visible {
+  opacity: 1;
+  animation: pulse-glow 3s var(--ease-in-out) infinite;
+}
+
+.avatar__na {
+  color: var(--faint);
+  font-size: var(--fs-xs);
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .boy__aura,
+  .boy__body,
+  .boy__head,
+  .boy__eye,
+  .boy__arm-wave,
+  .boy__hair,
+  .boy__shadow,
+  .boy__enter,
+  .boy__head-enter,
+  .boy__arm-enter,
+  .boy__shadow-enter,
+  .boy__spark {
+    animation: none;
+  }
+
+  .boy__mouth,
+  .boy__bar {
+    animation: none;
+    transform: none;
+  }
+
+  .avatar__hint.is-visible {
+    animation: none;
+  }
+}

@@ -1,0 +1,138 @@
+/* =============================================================
+   Footer — minimal, futuristic
+   ============================================================= */
+
+.footer {
+  position: relative;
+  padding: 2rem 0 2.5rem;
+  border-top: 1px solid var(--border);
+  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--bg-deep) 70%, transparent));
+}
+
+.footer__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.75rem;
+  padding: clamp(1.4rem, 1rem + 1.4vw, 2.25rem);
+  border-radius: var(--radius-lg);
+}
+
+.footer__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 0.9rem + 0.8vw, 1.45rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-strong);
+}
+
+.footer__brand-line {
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
+
+.footer__socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.footer__social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.6rem;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--bg-elev);
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  transition: color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-out), background-color var(--dur) var(--ease-out);
+}
+
+.footer__social:hover {
+  color: var(--text-strong);
+  border-color: var(--border-strong);
+  background: var(--grad-accent-soft);
+  transform: translateY(-2px);
+}
+
+/* Socials pop in one after another as the footer card appears */
+.footer__top.is-visible .footer__social {
+  animation: pop 520ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * 70ms + 120ms);
+}
+
+.footer__social-icon {
+  display: grid;
+  place-items: center;
+  color: var(--accent-text);
+}
+
+.footer__social:hover .footer__social-icon {
+  transform: translateY(-2px) rotate(-6deg);
+  color: var(--text-strong);
+}
+
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-inline: 0.35rem;
+}
+
+.footer__copy {
+  color: var(--faint);
+  font-size: var(--fs-xs);
+}
+
+.footer__to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.footer__to-top:hover {
+  color: var(--accent-text);
+}
+
+.footer__to-top span {
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.footer__to-top:hover span {
+  transform: translateY(-3px);
+}
+
+@media (max-width: 640px) {
+  .footer__top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer__socials {
+    width: 100%;
+  }
+}
+
+@media (pointer: coarse) {
+  .footer__to-top {
+    padding: 0.6rem 0;
+  }
+
+  .footer__social {
+    min-height: 3rem;
+  }
+}

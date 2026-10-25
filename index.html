@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <title>Medapati Uday Sai Reddy | Software Developer &amp; Photographer</title>
+    <meta
+      name="description"
+      content="Portfolio of Medapati Uday Sai Reddy, a B.Tech CSE student at Aditya University, aspiring software developer, and photographer."
+    />
+    <meta name="author" content="Medapati Uday Sai Reddy" />
+    <meta name="theme-color" content="#101322" />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="canonical" href="https://udaysaireddy18.github.io/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Medapati Uday Sai Reddy" />
+    <meta property="og:title" content="Medapati Uday Sai Reddy | Software Developer &amp; Photographer" />
+    <meta
+      property="og:description"
+      content="Portfolio of Medapati Uday Sai Reddy, a B.Tech CSE student at Aditya University, aspiring software developer, and photographer."
+    />
+    <meta property="og:url" content="https://udaysaireddy18.github.io/" />
+    <meta property="og:image" content="https://udaysaireddy18.github.io/og-cover.svg" />
+    <meta property="og:image:alt" content="Medapati Uday Sai Reddy — Building with code. Capturing with creativity." />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Medapati Uday Sai Reddy | Software Developer &amp; Photographer" />
+    <meta
+      name="twitter:description"
+      content="B.Tech CSE student at Aditya University, aspiring software developer and photographer."
+    />
+    <meta name="twitter:image" content="https://udaysaireddy18.github.io/og-cover.svg" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Fonts: preconnect + a single small set of weights -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Restore the saved theme before first paint (no flash of wrong theme) -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("usr-theme");
+          var prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+          var theme = stored === "light" || stored === "dark" ? stored : prefersLight ? "light" : "dark";
+          document.documentElement.dataset.theme = theme;
+          if (theme === "light") {
+            document.querySelector('meta[name="theme-color"]').setAttribute("content", "#f5f6fa");
+          }
+        } catch (e) {
+          document.documentElement.dataset.theme = "dark";
+        }
+      })();
+    </script>
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Medapati Uday Sai Reddy",
+        "url": "https://udaysaireddy18.github.io/",
+        "email": "mailto:udaysaireddy181@gmail.com",
+        "jobTitle": "Aspiring Software Developer and Photographer",
+        "description": "B.Tech CSE student at Aditya University, aspiring software developer and photographer. Building with code. Capturing with creativity.",
+        "sameAs": [
+          "https://github.com/udaysaireddy18",
+          "https://www.linkedin.com/in/uday-sai-reddy-medapati-b09328425/"
+        ],
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Aditya University"
+        },
+        "knowsAbout": ["C", "C++", "Python", "HTML", "CSS", "JavaScript", "MySQL", "Supabase", "Firebase", "Git", "GitHub", "Vercel", "Render", "Data Analytics", "Adobe Premiere Pro", "Photography"]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <div style="padding: 2rem; font-family: system-ui, sans-serif; color: #e7eaf3; background: #101322">
+        <h1>Medapati Uday Sai Reddy</h1>
+        <p>B.Tech CSE Student • Aspiring Software Developer • Photographer</p>
+        <p>
+          This portfolio needs JavaScript enabled. Reach me directly at
+          <a href="mailto:udaysaireddy181@gmail.com">udaysaireddy181@gmail.com</a> or on
+          <a href="https://github.com/udaysaireddy18" rel="noopener">GitHub</a>.
+        </p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

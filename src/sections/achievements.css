@@ -1,0 +1,198 @@
+/* =============================================================
+   Certifications & Achievements
+   ============================================================= */
+
+/* ---------- Grid ---------- */
+
+.cert__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: clamp(1rem, 0.8rem + 0.8vw, 1.4rem);
+}
+
+/* ---------- Card ---------- */
+
+.cert__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: clamp(1.2rem, 1rem + 0.7vw, 1.6rem);
+  border-radius: var(--radius);
+  /* `backwards` (not `both`) so the finished animation releases the
+     transform and the hover lift below still applies. */
+  animation: cert-slide-in 620ms var(--ease-out) backwards;
+  animation-delay: var(--reveal-delay, 0ms);
+  transition:
+    transform var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out);
+}
+
+/* Alternate the entrance direction so the grid sweeps in from both sides.
+   `overflow-x: clip` on the page keeps the sideways travel from adding
+   horizontal scrollbars. */
+.cert__card:nth-child(even) {
+  animation-name: cert-slide-in--right;
+}
+
+@keyframes cert-slide-in {
+  from {
+    opacity: 0;
+    transform: translate3d(-46px, 14px, 0) rotate(-1.2deg) scale(0.97);
+  }
+}
+
+@keyframes cert-slide-in--right {
+  from {
+    opacity: 0;
+    transform: translate3d(46px, 14px, 0) rotate(1.2deg) scale(0.97);
+  }
+}
+
+/* Soft accent halo that fades in around the card on hover. */
+.cert__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    20rem 20rem at 50% 0%,
+    rgba(181, 163, 230, 0.32),
+    rgba(123, 160, 218, 0.18) 45%,
+    transparent 72%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+  pointer-events: none;
+}
+
+.cert__card:hover,
+.cert__card:focus-within {
+  transform: translateY(-6px);
+  border-color: var(--border-strong);
+  background: var(--surface-hover);
+  box-shadow: var(--shadow-glow);
+}
+
+.cert__card:hover::before,
+.cert__card:focus-within::before {
+  opacity: 1;
+}
+
+.cert__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.cert__category {
+  max-width: 62%;
+  white-space: normal;
+  text-align: right;
+  line-height: 1.35;
+}
+
+.cert__name {
+  font-size: var(--fs-h3);
+  line-height: 1.3;
+}
+
+.cert__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: var(--fs-xs);
+}
+
+.cert__issuer {
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  color: var(--accent-text);
+}
+
+.cert__meta .mono {
+  color: var(--faint);
+  letter-spacing: 0.06em;
+}
+
+.cert__meta-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--lav-400);
+  box-shadow: 0 0 6px var(--lav-400);
+}
+
+.cert__desc {
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
+
+.cert__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.6rem;
+}
+
+/* ---------- Empty state ---------- */
+
+.cert__empty-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 9rem;
+  height: 9rem;
+}
+
+.cert__empty-ring {
+  position: absolute;
+  inset: 0;
+  border: 1px dashed var(--border-strong);
+  border-radius: 50%;
+}
+
+.cert__empty-ring--inner {
+  inset: 1.1rem;
+  border-style: solid;
+  border-color: var(--border);
+  animation: spin-slow 26s linear infinite;
+}
+
+.cert__empty-cap {
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1px var(--border),
+    0 0 34px -8px var(--lav-400),
+    var(--shadow-sm);
+  animation: float-y 7s var(--ease-in-out) infinite;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
+  .cert__category {
+    max-width: 58%;
+  }
+
+  .cert__actions .btn {
+    flex: 1 1 auto;
+  }
+}

@@ -1,0 +1,385 @@
+/* =============================================================
+   Navbar — sticky, glass on scroll, animated active indicator
+   ============================================================= */
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  transition:
+    background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out),
+    backdrop-filter var(--dur) var(--ease-out);
+  border-bottom: 1px solid transparent;
+}
+
+.nav--scrolled {
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  border-bottom-color: var(--border);
+  box-shadow: 0 12px 40px -30px rgba(0, 0, 0, 0.9);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  height: 4.5rem;
+}
+
+/* ---------- brand ---------- */
+
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--text-strong);
+  flex-shrink: 0;
+}
+
+.nav__mark {
+  display: grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 12px;
+  background: var(--grad-fill);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 22px -12px rgba(123, 160, 218, 0.42);
+  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+}
+
+.nav__brand:hover .nav__mark {
+  transform: rotate(-6deg) scale(1.06);
+  box-shadow: 0 12px 28px -12px rgba(181, 163, 230, 0.5);
+}
+
+.nav__brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.nav__brand-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.94rem;
+  letter-spacing: -0.01em;
+}
+
+.nav__brand-role {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* ---------- Desktop links ---------- */
+
+.nav__links {
+  display: none;
+  align-items: center;
+  gap: 0.15rem;
+  position: relative;
+  padding: 0.25rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  transition: border-color var(--dur) var(--ease-out), background-color var(--dur) var(--ease-out);
+}
+
+.nav--scrolled .nav__links {
+  border-color: var(--border);
+  background: var(--bg-elev);
+}
+
+.nav__link {
+  position: relative;
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--muted);
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.nav__link:hover {
+  color: var(--text-strong);
+}
+
+/* Underline sweep on hover — the active link keeps the sliding pill instead */
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0.8rem;
+  right: 0.8rem;
+  bottom: 0.24rem;
+  height: 1.5px;
+  border-radius: 2px;
+  background: var(--grad-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.nav__link:hover::after {
+  transform: scaleX(1);
+}
+
+.nav__link.is-active::after {
+  transform: scaleX(0);
+}
+
+.nav__link.is-active {
+  color: var(--text-strong);
+}
+
+/* Sliding pill indicator under the active link */
+.nav__indicator {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  min-width: 1rem;
+  border-radius: 999px;
+  background: var(--grad-accent);
+  box-shadow: 0 0 12px rgba(181, 163, 230, 0.34);
+  translate: -50% 0;
+  scale: 0.4 1;
+  opacity: 0;
+  transition:
+    translate 460ms var(--ease-out),
+    width 460ms var(--ease-out),
+    scale 460ms var(--ease-out),
+    opacity var(--dur) var(--ease-out);
+  display: none;
+  pointer-events: none;
+}
+
+.nav--scrolled .nav__indicator {
+  scale: 1 1;
+  opacity: 1;
+}
+
+/* ---------- Actions ---------- */
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.nav__burger {
+  display: inline-grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-elev);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.nav__burger:hover {
+  border-color: var(--border-strong);
+  color: var(--accent-text);
+}
+
+/* ---------- Theme toggle ---------- */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--bg-elev);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.theme-toggle:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 0 0 3px rgba(181, 163, 230, 0.09);
+}
+
+.theme-toggle__track {
+  display: flex;
+  width: 3.6rem;
+  height: 2.1rem;
+  padding: 3px;
+}
+
+.theme-toggle__thumb {
+  display: grid;
+  place-items: center;
+  width: 1.62rem;
+  height: 1.62rem;
+  border-radius: 50%;
+  background: var(--grad-fill);
+  color: #fff;
+  translate: 0 0;
+  transition: translate 380ms var(--ease-out), box-shadow var(--dur) var(--ease-out);
+}
+
+.theme-toggle[aria-pressed="false"] .theme-toggle__thumb {
+  translate: 1.44rem 0;
+  background: linear-gradient(140deg, #f4d49c, #e6b47c);
+  color: #3d2f14;
+}
+
+/* ---------- Mobile drawer ---------- */
+
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  padding: 5.25rem var(--gutter) 2rem;
+  background: color-mix(in srgb, var(--bg-deep) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur) var(--ease-out);
+  overflow-y: auto;
+}
+
+.mobile-nav.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav__panel {
+  border-radius: var(--radius-lg);
+  padding: 1.15rem 1.15rem 1.5rem;
+  animation: drawer-in 420ms var(--ease-out) both;
+}
+
+@keyframes drawer-in {
+  from {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.985);
+  }
+}
+
+.mobile-nav__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.mobile-nav__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.mobile-nav__close {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.mobile-nav__list {
+  display: grid;
+  gap: 0.15rem;
+  margin-top: 0.85rem;
+}
+
+.mobile-nav__link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 0.75rem;
+  min-height: 3rem;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.02rem;
+  border: 1px solid transparent;
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.mobile-nav__link:hover,
+.mobile-nav__link:focus-visible {
+  background: var(--bg-elev);
+  border-color: var(--border);
+}
+
+.mobile-nav__link.is-active {
+  color: var(--accent-text);
+  background: var(--grad-accent-soft);
+  border-color: var(--border-strong);
+}
+
+.mobile-nav__num {
+  font-size: 0.68rem;
+  color: var(--faint);
+  letter-spacing: 0.08em;
+}
+
+/* ---------- breakpoints ---------- */
+
+@media (min-width: 620px) {
+  .nav__indicator {
+    display: block;
+  }
+}
+
+@media (min-width: 1060px) {
+  .nav__links {
+    display: flex;
+  }
+
+  .nav__burger {
+    display: none;
+  }
+}
+
+@media (max-width: 1059px) {
+  .nav__brand-role {
+    display: none;
+  }
+}
+
+/* Comfortable tap areas on touch devices */
+@media (pointer: coarse) {
+  .theme-toggle {
+    padding: 4px;
+  }
+
+  .nav__brand {
+    padding: 3px;
+  }
+
+  .nav__burger {
+    width: 2.9rem;
+    height: 2.9rem;
+  }
+
+  .nav__link {
+    padding: 0.7rem 0.85rem;
+  }
+}

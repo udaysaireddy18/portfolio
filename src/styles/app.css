@@ -1,0 +1,32 @@
+/* =============================================================
+   App-level layout niceties
+   ============================================================= */
+
+/* Sections contain the horizontal drift of their reveal animations so that
+   offset elements can never widen the page on small screens. */
+.section {
+  overflow-x: clip;
+}
+
+/* Sections separated by a soft hairline that fades toward the edges and
+   carries a slow sheen, so the seams feel alive as you scroll. */
+main > section + section::before {
+  content: "";
+  position: absolute;
+  inset: 0 var(--gutter) auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  background-size: 200% 100%;
+  animation: divider-sheen 9s var(--ease-in-out) infinite;
+  pointer-events: none;
+}
+
+#home + section::before {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  main > section {
+    padding-block: clamp(3.25rem, 2.4rem + 4vw, 4.5rem);
+  }
+}

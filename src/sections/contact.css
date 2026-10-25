@@ -1,0 +1,207 @@
+/* =============================================================
+   Contact — channels + validated form
+   ============================================================= */
+
+.contact {
+  display: grid;
+  gap: clamp(2rem, 1.4rem + 2.5vw, 3.5rem);
+  align-items: start;
+}
+
+.contact__title {
+  margin-block: 0.6rem 0.9rem;
+  font-size: var(--fs-h2);
+}
+
+.contact__channels {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 2rem;
+}
+
+.contact__channel {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  color: inherit;
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+
+.contact__channel:hover {
+  transform: translateX(5px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-glow);
+}
+
+.contact__channel-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.contact__channel-label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.contact__channel-value {
+  font-size: var(--fs-sm);
+  color: var(--text-strong);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Form ---------- */
+
+.contact__form {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.25rem, 1rem + 1.2vw, 2rem);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glow);
+}
+
+.contact__form-title {
+  font-size: 1.15rem;
+  margin-bottom: 0.25rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.field__label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.field__input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elev);
+  color: var(--text-strong);
+  font-size: 0.95rem;
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+.field__input::placeholder {
+  color: var(--faint);
+}
+
+.field__input:hover {
+  border-color: var(--border-strong);
+}
+
+.field__input:focus {
+  outline: none;
+  border-color: var(--accent-text);
+  box-shadow: 0 0 0 3px rgba(123, 160, 218, 0.13);
+}
+
+.field__input[aria-invalid="true"] {
+  border-color: rgba(255, 122, 122, 0.7);
+  box-shadow: 0 0 0 3px rgba(255, 122, 122, 0.12);
+}
+
+.field__input--area {
+  min-height: 8rem;
+  resize: vertical;
+  line-height: 1.65;
+}
+
+.field__error {
+  color: #e09390;
+  font-size: var(--fs-xs);
+}
+
+:root[data-theme="light"] .field__error {
+  color: #b5443f;
+}
+
+.contact__status {
+  min-height: 1.2rem;
+  font-size: var(--fs-xs);
+}
+
+.contact__status--done {
+  color: #a2c9a6;
+}
+
+.contact__status--error {
+  color: #e09390;
+}
+
+:root[data-theme="light"] .contact__status--done {
+  color: #3f7a52;
+}
+
+:root[data-theme="light"] .contact__status--error {
+  color: #b5443f;
+}
+
+.contact__hint {
+  font-size: var(--fs-xs);
+  color: var(--faint);
+  border-top: 1px dashed var(--border);
+  padding-top: 0.75rem;
+}
+
+.contact__hint code {
+  font-family: var(--font-mono);
+  color: var(--accent-text);
+}
+
+/* ---------- Entrance choreography ---------- */
+
+.contact__intro.is-visible .contact__channel {
+  animation: fade-up 560ms var(--ease-out) both;
+}
+
+.contact__intro.is-visible .contact__channels li:nth-child(2) .contact__channel {
+  animation-delay: 90ms;
+}
+
+.contact__intro.is-visible .contact__channels li:nth-child(3) .contact__channel {
+  animation-delay: 180ms;
+}
+
+.contact__form-wrap.is-visible .contact__form-title {
+  animation: fade-up 520ms var(--ease-out) both;
+}
+
+.contact__form-wrap.is-visible .field {
+  animation: fade-up 520ms var(--ease-out) both;
+}
+
+.contact__form-wrap.is-visible .field:nth-child(2) {
+  animation-delay: 70ms;
+}
+
+.contact__form-wrap.is-visible .field:nth-child(3) {
+  animation-delay: 140ms;
+}
+
+.contact__form-wrap.is-visible .field:nth-child(4) {
+  animation-delay: 210ms;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (min-width: 940px) {
+  .contact {
+    grid-template-columns: 1fr 1.05fr;
+  }
+}

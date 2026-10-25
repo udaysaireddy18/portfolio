@@ -1,0 +1,28 @@
+/* =============================================================
+   Projects — featured grid + compact "more projects" area
+   ============================================================= */
+
+.projects__grid {
+  display: grid;
+  gap: clamp(1rem, 0.8rem + 1vw, 1.75rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+
+.projects__note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin-top: 2rem;
+  padding: 0.85rem 1.05rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elev);
+  color: var(--faint);
+  font-size: var(--fs-xs);
+}
+
+.projects__note svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--accent-text);
+}

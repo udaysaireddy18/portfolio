@@ -1,0 +1,241 @@
+/* =============================================================
+   Education — interactive timeline card
+   ============================================================= */
+
+.edu__timeline {
+  position: relative;
+  display: grid;
+  gap: clamp(1.25rem, 1rem + 1vw, 2rem);
+  padding-left: 0;
+}
+
+.edu__timeline::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--border-strong), transparent);
+  transform: scaleY(0);
+  transform-origin: top center;
+}
+
+/* The connector line draws itself downwards as the timeline enters view */
+.edu__timeline.is-visible::before {
+  animation: line-grow 900ms var(--ease-out) 120ms both;
+}
+
+.edu__item {
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+.edu__marker {
+  position: absolute;
+  left: 0;
+  top: 1.6rem;
+  display: grid;
+  place-items: center;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: var(--bg);
+}
+
+.edu__marker-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-text);
+  box-shadow: 0 0 10px var(--lav-400);
+  animation: pulse-glow 3.6s var(--ease-in-out) infinite;
+}
+
+/* Completed entries get a still marker — no pulsing, no "in progress" signal */
+.edu__item--done .edu__marker-dot {
+  animation: none;
+  opacity: 0.75;
+  box-shadow: none;
+}
+
+.edu__card {
+  position: relative;
+  padding: clamp(1.25rem, 1rem + 0.9vw, 1.85rem);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out), background-color var(--dur) var(--ease-out);
+}
+
+.edu__card:hover,
+.edu__card:focus-visible {
+  transform: translateY(-5px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-glow);
+}
+
+.edu__card-glow {
+  position: absolute;
+  top: -60%;
+  right: -10%;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(181, 163, 230, 0.13), transparent 66%);
+  filter: blur(26px);
+  opacity: 0;
+  transition: opacity 720ms var(--ease-out);
+  pointer-events: none;
+}
+
+.edu__card:hover .edu__card-glow,
+.edu__card:focus-visible .edu__card-glow {
+  opacity: 1;
+}
+
+.edu__card-head {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Graduation-cap tile that sits ahead of every qualification */
+.edu__cap {
+  display: grid;
+  place-items: center;
+  width: 2.85rem;
+  height: 2.85rem;
+  flex-shrink: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  background: var(--grad-accent-soft);
+  color: var(--accent-text);
+  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+
+.edu__card:hover .edu__cap,
+.edu__card:focus-visible .edu__cap {
+  transform: translateY(-2px) rotate(-6deg);
+  border-color: var(--accent-text);
+  box-shadow: 0 12px 26px -18px rgba(181, 163, 230, 0.45);
+}
+
+.edu__head-text {
+  flex: 1 1 14rem;
+  min-width: 0;
+}
+
+.edu__degree {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.edu__field {
+  margin-top: 0.35rem;
+  font-size: var(--fs-h3);
+  max-width: 22ch;
+}
+
+.edu__institution {
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
+
+.edu__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.edu__highlights {
+  position: relative;
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding-top: 1.1rem;
+  border-top: 1px dashed var(--border);
+}
+
+.edu__highlights li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  transition: color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.edu__highlights li:hover {
+  color: var(--text);
+  transform: translateX(3px);
+}
+
+.edu__highlights svg {
+  flex-shrink: 0;
+  margin-top: 4px;
+  color: var(--accent-text);
+}
+
+/* Highlights cascade in after their card has landed */
+.edu__item.is-visible .edu__highlights li {
+  animation: fade-up 480ms var(--ease-out) both;
+}
+
+.edu__item.is-visible .edu__highlights li:nth-child(2) {
+  animation-delay: 70ms;
+}
+
+.edu__item.is-visible .edu__highlights li:nth-child(3) {
+  animation-delay: 140ms;
+}
+
+.edu__item.is-visible .edu__highlights li:nth-child(4) {
+  animation-delay: 210ms;
+}
+
+/* Future marker */
+.edu__ghost {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 1rem 1.15rem;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--grad-accent-soft);
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
+
+.edu__ghost strong {
+  color: var(--text-strong);
+}
+
+.edu__ghost svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--accent-text);
+}
+
+@media (min-width: 720px) {
+  .edu__timeline {
+    padding-left: 0.5rem;
+  }
+}
+
+/* Narrow screens: let the status badges drop onto their own row */
+@media (max-width: 560px) {
+  .edu__meta {
+    width: 100%;
+  }
+}

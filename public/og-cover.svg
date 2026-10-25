@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7ba0da" />
+      <stop offset="100%" stop-color="#b5a3e6" />
+    </linearGradient>
+    <radialGradient id="glowA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5b83c6" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#5b83c6" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowB" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#b5a3e6" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#b5a3e6" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#7ba0da" stroke-opacity="0.09" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#101322" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+  <ellipse cx="180" cy="90" rx="520" ry="380" fill="url(#glowA)" />
+  <ellipse cx="1080" cy="580" rx="460" ry="340" fill="url(#glowB)" />
+
+  <circle cx="980" cy="315" r="210" fill="none" stroke="url(#accent)" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="10 14" />
+  <circle cx="980" cy="315" r="120" fill="none" stroke="url(#accent)" stroke-opacity="0.28" stroke-width="1.5" />
+  <circle cx="980" cy="315" r="10" fill="url(#accent)" />
+
+  <text x="90" y="215" font-family="ui-monospace, monospace" font-size="21" letter-spacing="7" fill="#a8afc6">
+    MEDAPATI UDAY SAI REDDY
+  </text>
+  <text x="90" y="290" font-family="Segoe UI, system-ui, sans-serif" font-size="60" font-weight="700" fill="#ffffff">
+    Building with code.
+  </text>
+  <text x="90" y="360" font-family="Segoe UI, system-ui, sans-serif" font-size="60" font-weight="700" fill="url(#accent)">
+    Capturing with creativity.
+  </text>
+  <text x="90" y="415" font-family="Segoe UI, system-ui, sans-serif" font-size="26" fill="#a8afc6">
+    B.Tech CSE Student · Aspiring Software Developer · Photographer
+  </text>
+  <rect x="90" y="455" width="120" height="4" rx="2" fill="url(#accent)" />
+</svg>

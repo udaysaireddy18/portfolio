@@ -1,0 +1,214 @@
+/* =============================================================
+   Animation utilities — reveal, float, pulse, shimmer
+   ============================================================= */
+
+/* Scroll reveal — driven by IntersectionObserver in useReveal */
+.reveal {
+  opacity: 0;
+  translate: 0 26px;
+  scale: 0.985;
+  transition:
+    opacity 760ms var(--ease-out),
+    translate 760ms var(--ease-out),
+    scale 760ms var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, translate;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  translate: 0 0;
+  scale: 1;
+}
+
+.reveal--left {
+  translate: -30px 0;
+}
+
+.reveal--right {
+  translate: 30px 0;
+}
+
+.reveal--scale {
+  scale: 0.94;
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -12px;
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(4%, -6%, 0) scale(1.08);
+  }
+  66% {
+    transform: translate3d(-4%, 4%, 0) scale(0.96);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes sheen {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(220%) skewX(-18deg);
+  }
+}
+
+@keyframes caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.anim-float {
+  animation: float-y 7s var(--ease-in-out) infinite;
+}
+
+.anim-drift {
+  animation: drift 26s var(--ease-in-out) infinite;
+}
+
+.anim-spin-slow {
+  animation: spin-slow 26s linear infinite;
+}
+
+.anim-pulse {
+  animation: pulse-glow 4.5s var(--ease-in-out) infinite;
+}
+
+/* ---------- Page-wide motion primitives ---------- */
+
+/* One-shot entrances. Only the start is defined, so elements settle into
+   their natural state; using the individual translate/scale/opacity
+   properties keeps them composable with hover `transform`s. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    scale: 0.92;
+    translate: 0 10px;
+  }
+}
+
+/* A vertical rule that draws itself in from the top */
+@keyframes line-grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* Page load fade */
+@keyframes page-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Slow, seamless ambient drift of the background grid (moves exactly one tile) */
+@keyframes grid-drift {
+  to {
+    background-position: 68px 68px;
+  }
+}
+
+/* Breathing of the ambient page glows */
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* A sheen that travels across the hairline dividers between sections */
+@keyframes divider-sheen {
+  0%,
+  55%,
+  100% {
+    background-position: -60% 0;
+  }
+  75% {
+    background-position: 160% 0;
+  }
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform-origin: 0 50%;
+  scale: var(--progress, 0) 1;
+  background: var(--grad-accent);
+  z-index: 120;
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    translate: none;
+    scale: 1;
+  }
+}

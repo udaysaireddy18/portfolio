@@ -1,0 +1,109 @@
+/* =============================================================
+   Design tokens — calm blue + lavender, dark-first
+   Kept low-saturation and low-glow on purpose: the surfaces should
+   read as soft paper/ink rather than neon.
+   ============================================================= */
+
+:root {
+  color-scheme: dark;
+
+  /* Blue ramp — primary */
+  --blue-300: #9db9e6;
+  --blue-400: #7ba0da;
+  --blue-500: #5b83c6;
+  --blue-600: #4468a8;
+
+  /* Lavender ramp — secondary accent */
+  --lav-300: #cdc0ef;
+  --lav-400: #b5a3e6;
+  --lav-500: #9c88d6;
+  --lav-600: #8169c2;
+
+  --grad-accent: linear-gradient(120deg, var(--blue-400) 0%, var(--lav-400) 100%);
+  --grad-accent-soft: linear-gradient(120deg, rgba(123, 160, 218, 0.14) 0%, rgba(181, 163, 230, 0.12) 100%);
+  /* Mid-tone fill used behind white text (buttons, logo mark, toggle thumb) */
+  --grad-fill: linear-gradient(130deg, #4a76c2 0%, #5c6ec4 55%, #6f62c6 100%);
+  /* Text/icon colour that sits on top of accent fills */
+  --on-accent: #ffffff;
+  /* Accessible accent text colour (deepened in light mode) */
+  --accent-text: var(--lav-300);
+
+  /* Typography */
+  --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Cascadia Code", ui-monospace, monospace;
+
+  --fs-hero: clamp(2.15rem, 1.2rem + 4.2vw, 5rem);
+  --fs-h2: clamp(1.75rem, 1.15rem + 2.1vw, 2.85rem);
+  --fs-h3: clamp(1.15rem, 1rem + 0.6vw, 1.45rem);
+  --fs-lead: clamp(1rem, 0.95rem + 0.35vw, 1.15rem);
+  --fs-body: clamp(0.95rem, 0.92rem + 0.15vw, 1.02rem);
+  --fs-sm: 0.875rem;
+  --fs-xs: 0.78rem;
+
+  /* Spacing / layout */
+  --container: 1200px;
+  --container-wide: 1360px;
+  --gutter: clamp(1.15rem, 0.7rem + 2vw, 2.75rem);
+  --section-y: clamp(4.5rem, 3rem + 6vw, 8.5rem);
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 26px;
+  --radius-pill: 999px;
+
+  /* Motion — slower and gentler than a neon UI */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur: 340ms;
+  --dur-slow: 800ms;
+
+  /* Dark theme (default) — deep indigo-slate, not black */
+  --bg: #101322;
+  --bg-deep: #0b0d18;
+  --bg-elev: rgba(255, 255, 255, 0.03);
+  --surface: rgba(30, 35, 57, 0.55);
+  --surface-strong: rgba(34, 40, 64, 0.78);
+  --surface-hover: rgba(44, 51, 79, 0.6);
+  --border: rgba(186, 196, 230, 0.12);
+  --border-strong: rgba(186, 196, 230, 0.26);
+  --grid-line: rgba(176, 188, 226, 0.045);
+  --text: #e7eaf3;
+  --text-strong: #ffffff;
+  --muted: #a8afc6;
+  --faint: #929ab3;
+  --shadow-sm: 0 2px 12px rgba(10, 13, 26, 0.35);
+  --shadow: 0 16px 40px -26px rgba(10, 13, 26, 0.7);
+  --shadow-glow: 0 0 0 1px rgba(160, 176, 226, 0.14), 0 20px 50px -32px rgba(92, 110, 196, 0.4);
+  --glass-blur: saturate(130%) blur(14px);
+  --scrim: rgba(11, 13, 24, 0.72);
+  --particle: rgba(186, 194, 232, 0.42);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  /* Deepened lavender so accent-coloured text keeps AA contrast on light surfaces */
+  --lav-300: #6d59bd;
+  --lav-400: #7a66c8;
+  --accent-text: #5b4aa8;
+
+  --bg: #f5f6fa;
+  --bg-deep: #eceef6;
+  --bg-elev: rgba(255, 255, 255, 0.72);
+  --surface: rgba(255, 255, 255, 0.74);
+  --surface-strong: rgba(255, 255, 255, 0.9);
+  --surface-hover: rgba(255, 255, 255, 0.98);
+  --border: rgba(52, 62, 108, 0.12);
+  --border-strong: rgba(68, 104, 168, 0.26);
+  --grid-line: rgba(80, 96, 150, 0.05);
+  --text: #232839;
+  --text-strong: #10131f;
+  --muted: #515a72;
+  --faint: #5f6880;
+  --shadow-sm: 0 2px 10px rgba(40, 52, 92, 0.07);
+  --shadow: 0 18px 40px -28px rgba(45, 58, 104, 0.28);
+  --shadow-glow: 0 0 0 1px rgba(92, 110, 196, 0.16), 0 20px 48px -32px rgba(92, 110, 196, 0.34);
+  --scrim: rgba(236, 238, 246, 0.75);
+  --particle: rgba(92, 110, 196, 0.34);
+}
