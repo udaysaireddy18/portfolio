@@ -18,6 +18,10 @@
   gap: 0.55rem;
   padding: clamp(1.2rem, 1rem + 0.7vw, 1.6rem);
   border-radius: var(--radius);
+  overflow: hidden;
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.045), transparent 55%),
+    var(--surface);
   /* `backwards` (not `both`) so the finished animation releases the
      transform and the hover lift below still applies. */
   animation: cert-slide-in 620ms var(--ease-out) backwards;
@@ -27,6 +31,22 @@
     border-color var(--dur) var(--ease-out),
     box-shadow var(--dur) var(--ease-out),
     background-color var(--dur) var(--ease-out);
+}
+
+.cert__card::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue-400), var(--lav-400) 42%, transparent 84%);
+  opacity: 0.55;
+  transition: opacity var(--dur) var(--ease-out);
+  pointer-events: none;
+}
+
+.cert__card:hover::after,
+.cert__card:focus-within::after {
+  opacity: 1;
 }
 
 /* Alternate the entrance direction so the grid sweeps in from both sides.

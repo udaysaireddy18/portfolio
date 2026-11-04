@@ -29,6 +29,9 @@ export function Education() {
 
               <article className="edu__card glass" tabIndex={0}>
                 <div className="edu__card-glow" aria-hidden="true" />
+                <span className="edu__index mono" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
 
                 <header className="edu__card-head">
                   <span className="edu__cap" aria-hidden="true">

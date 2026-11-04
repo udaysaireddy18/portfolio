@@ -9,20 +9,53 @@
 }
 
 .skills__card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
   height: 100%;
   padding: clamp(1.15rem, 1rem + 0.6vw, 1.6rem);
   border-radius: var(--radius);
+  overflow: hidden;
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.045), transparent 55%),
+    var(--surface);
   transition: border-color var(--dur) var(--ease-out), background-color var(--dur) var(--ease-out),
     box-shadow var(--dur) var(--ease-out);
+}
+
+.skills__card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue-400), var(--lav-400) 42%, transparent 86%);
+  opacity: 0.55;
+  transition: opacity var(--dur) var(--ease-out);
 }
 
 .skills__card:hover {
   border-color: var(--border-strong);
   background: var(--surface-hover);
   box-shadow: var(--shadow-glow);
+}
+
+.skills__card:hover::before {
+  opacity: 1;
+}
+
+.skills__watermark {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.1rem;
+  font-size: 3.4rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.08em;
+  color: var(--text-strong);
+  opacity: 0.035;
+  pointer-events: none;
+  user-select: none;
 }
 
 .skills__head {
@@ -146,6 +179,57 @@
 .skills__col.is-visible .skills__item {
   animation: pop 460ms var(--ease-out) both;
   animation-delay: calc(var(--i) * 55ms + 90ms);
+}
+
+/* ---------- Process strip ---------- */
+
+.skills__flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem);
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--grad-accent-soft);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+.skills__flow-step {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+}
+
+.skills__flow-num {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--faint);
+}
+
+.skills__flow-name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.skills__flow-step:not(:last-child) .skills__flow-name::after {
+  content: "";
+  display: inline-block;
+  width: 1.6rem;
+  height: 1px;
+  margin-left: 0.85rem;
+  vertical-align: middle;
+  background: linear-gradient(90deg, var(--lav-400), transparent);
+}
+
+@media (min-width: 640px) {
+  .skills__flow {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 /* Larger screens: 3 columns max keeps line lengths comfortable */

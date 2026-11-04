@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { navLinks, profile } from "../data/portfolio";
 import { useScrollSpy } from "../hooks/useScrollSpy";
 import { ThemeToggle } from "./ThemeToggle";
-import { CloseIcon, MenuIcon } from "./icons";
+import { ArrowUpRightIcon, CloseIcon, MenuIcon } from "./icons";
 import "./navbar.css";
 
 const SECTION_IDS: string[] = navLinks.map((link) => link.id);
@@ -140,6 +140,18 @@ export function Navbar() {
           </nav>
 
           <div className="nav__actions">
+            <a
+              className="nav__cta"
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                goTo("contact");
+              }}
+            >
+              <span className="nav__cta-dot" aria-hidden="true" />
+              Let&rsquo;s talk
+              <ArrowUpRightIcon width={14} height={14} />
+            </a>
             <ThemeToggle />
             <button
               ref={menuButtonRef}

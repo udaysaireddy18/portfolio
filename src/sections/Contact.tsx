@@ -48,7 +48,7 @@ export function Contact() {
         <div className="contact__intro reveal reveal--left">
           <p className="eyebrow">Contact</p>
           <h2 className="contact__title" id="contact-heading">
-            Let&rsquo;s Build Something <span className="grad-text">Together.</span>
+            Let&rsquo;s Build Something <span className="grad-text"><em>Together.</em></span>
           </h2>
           <p className="lead">{profile.contactLead}</p>
 

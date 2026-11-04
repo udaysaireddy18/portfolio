@@ -267,6 +267,102 @@
   }
 }
 
+/* ---------- "What I do" bento strip ---------- */
+
+.about__pillars {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: clamp(2.25rem, 1.6rem + 2vw, 3.5rem);
+}
+
+.about__pillar {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.95rem;
+  padding: 1.25rem 1.35rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.045), transparent 62%),
+    var(--surface);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  overflow: hidden;
+  transition:
+    transform var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+
+.about__pillar::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(107, 182, 255, 0.6), rgba(155, 108, 255, 0.35), transparent 78%);
+  opacity: 0.7;
+}
+
+.about__pillar:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-glow);
+}
+
+.about__pillar-icon {
+  display: grid;
+  place-items: center;
+  width: 2.65rem;
+  height: 2.65rem;
+  flex-shrink: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: 13px;
+  background: var(--grad-accent-soft);
+  color: var(--blue-300);
+}
+
+.about__pillar:nth-child(2) .about__pillar-icon {
+  color: var(--lav-300);
+}
+
+.about__pillar:nth-child(3) .about__pillar-icon {
+  color: var(--rose-300);
+}
+
+.about__pillar h3 {
+  font-size: 1.02rem;
+  letter-spacing: -0.02em;
+}
+
+.about__pillar p {
+  margin-top: 0.25rem;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  max-width: 32ch;
+}
+
+.about__pillar-num {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.9rem;
+  font-size: 0.66rem;
+  color: var(--faint);
+  opacity: 0.7;
+}
+
+.about__editor {
+  box-shadow: var(--shadow-glow);
+}
+
+@media (min-width: 760px) {
+  .about__pillars {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 @media (min-width: 900px) {
   .about__grid {
     grid-template-columns: 1.05fr 0.95fr;

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { profile } from "../data/portfolio";
 import { SectionHeading } from "../components/SectionHeading";
 import { useReducedMotion } from "../hooks/useReducedMotion";
-import { CodeIcon, SparkIcon } from "../components/icons";
+import { CameraIcon, ChartIcon, CodeIcon, SparkIcon } from "../components/icons";
 import "./about.css";
 
 const CODE_LINES: { text: string; tokens: { t: string; c: string }[] }[] = [
@@ -184,6 +184,47 @@ export function About() {
             <Aperture />
             <CodeStream />
           </div>
+        </div>
+
+        <div className="about__pillars reveal">
+          <article className="about__pillar">
+            <span className="about__pillar-icon" aria-hidden="true">
+              <CodeIcon width={20} height={20} />
+            </span>
+            <div>
+              <h3>Build</h3>
+              <p>Fullstack foundations — Python, JavaScript and clean, usable interfaces.</p>
+            </div>
+            <span className="about__pillar-num mono" aria-hidden="true">
+              01
+            </span>
+          </article>
+
+          <article className="about__pillar">
+            <span className="about__pillar-icon" aria-hidden="true">
+              <ChartIcon width={20} height={20} />
+            </span>
+            <div>
+              <h3>Analyse</h3>
+              <p>Data-minded thinking with MySQL, Supabase, Firebase and analytics.</p>
+            </div>
+            <span className="about__pillar-num mono" aria-hidden="true">
+              02
+            </span>
+          </article>
+
+          <article className="about__pillar">
+            <span className="about__pillar-icon" aria-hidden="true">
+              <CameraIcon width={20} height={20} />
+            </span>
+            <div>
+              <h3>Capture</h3>
+              <p>Photography and video editing — composition, light and story.</p>
+            </div>
+            <span className="about__pillar-num mono" aria-hidden="true">
+              03
+            </span>
+          </article>
         </div>
       </div>
     </section>

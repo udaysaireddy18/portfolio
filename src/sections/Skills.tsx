@@ -49,6 +49,9 @@ export function Skills() {
               max={5}
             >
               <div className="skills__card glass">
+                <span className="skills__watermark mono" aria-hidden="true">
+                  {String(categoryIndex + 1).padStart(2, "0")}
+                </span>
                 <header className="skills__head">
                   <h3 className="skills__title">{category.title}</h3>
                   <span className="skills__count mono">{category.skills.length}</span>
@@ -75,6 +78,17 @@ export function Skills() {
             </TiltCard>
           ))}
         </div>
+
+        <ol className="skills__flow reveal" aria-label="How I work">
+          {["Learn", "Build", "Refine", "Ship"].map((step, index) => (
+            <li className="skills__flow-step" key={step}>
+              <span className="skills__flow-num mono" aria-hidden="true">
+                0{index + 1}
+              </span>
+              <span className="skills__flow-name">{step}</span>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

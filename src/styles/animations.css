@@ -182,11 +182,12 @@
   position: fixed;
   top: 0;
   left: 0;
-  height: 2px;
+  height: 3px;
   width: 100%;
   transform-origin: 0 50%;
   scale: var(--progress, 0) 1;
   background: var(--grad-accent);
+  box-shadow: 0 0 16px rgba(155, 108, 255, 0.7);
   z-index: 120;
 }
 

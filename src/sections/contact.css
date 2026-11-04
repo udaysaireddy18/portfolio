@@ -26,8 +26,11 @@
   padding: 0.85rem 1rem;
   border-radius: var(--radius);
   color: inherit;
+  background:
+    linear-gradient(140deg, rgba(255, 255, 255, 0.04), transparent 60%),
+    var(--surface);
   transition: transform var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out),
-    box-shadow var(--dur) var(--ease-out);
+    box-shadow var(--dur) var(--ease-out), background-color var(--dur) var(--ease-out);
 }
 
 .contact__channel:hover {
@@ -59,16 +62,50 @@
 /* ---------- Form ---------- */
 
 .contact__form {
+  position: relative;
   display: grid;
   gap: 1rem;
   padding: clamp(1.25rem, 1rem + 1.2vw, 2rem);
   border-radius: var(--radius-lg);
+  overflow: hidden;
+  background:
+    radial-gradient(24rem 18rem at 100% 0%, rgba(155, 108, 255, 0.14), transparent 65%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.05), transparent 60%),
+    var(--surface);
   box-shadow: var(--shadow-glow);
 }
 
+.contact__form::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue-400), var(--lav-400) 45%, var(--rose-300) 70%, transparent);
+  opacity: 0.8;
+}
+
+.contact__form::after {
+  content: "";
+  position: absolute;
+  width: 20rem;
+  height: 20rem;
+  right: -9rem;
+  top: -9rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(155, 108, 255, 0.16), transparent 66%);
+  filter: blur(26px);
+  pointer-events: none;
+}
+
 .contact__form-title {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   margin-bottom: 0.25rem;
+}
+
+/* Keep the interactive layers above the decorative glow */
+.contact__form > * {
+  position: relative;
+  z-index: 1;
 }
 
 .field {

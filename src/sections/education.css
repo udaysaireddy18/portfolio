@@ -16,7 +16,12 @@
   top: 8px;
   bottom: 8px;
   width: 1px;
-  background: linear-gradient(to bottom, var(--border-strong), transparent);
+  background: linear-gradient(
+    to bottom,
+    rgba(107, 182, 255, 0.7),
+    rgba(155, 108, 255, 0.55) 45%,
+    transparent
+  );
   transform: scaleY(0);
   transform-origin: top center;
 }
@@ -65,8 +70,37 @@
   padding: clamp(1.25rem, 1rem + 0.9vw, 1.85rem);
   border-radius: var(--radius);
   overflow: hidden;
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.045), transparent 55%),
+    var(--surface);
   transition: transform var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out),
     box-shadow var(--dur) var(--ease-out), background-color var(--dur) var(--ease-out);
+}
+
+.edu__index {
+  position: absolute;
+  bottom: 0.7rem;
+  right: 1rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: var(--faint);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.edu__card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue-400), var(--lav-400) 40%, transparent 80%);
+  opacity: 0.55;
+  transition: opacity var(--dur) var(--ease-out);
+}
+
+.edu__card:hover::before,
+.edu__card:focus-visible::before {
+  opacity: 1;
 }
 
 .edu__card:hover,

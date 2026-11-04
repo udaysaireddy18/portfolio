@@ -11,6 +11,7 @@ import { Achievements } from "./sections/Achievements";
 import { Contact } from "./sections/Contact";
 import { useScrollReveal } from "./hooks/useScrollReveal";
 import { useParallax } from "./hooks/useParallax";
+import { useCursorGlow } from "./hooks/useCursorGlow";
 import "./styles/tokens.css";
 import "./styles/base.css";
 import "./styles/animations.css";
@@ -22,9 +23,14 @@ export default function App() {
   useScrollReveal();
   // Drifts elements marked `data-parallax` as the page scrolls.
   useParallax();
+  // A soft spotlight that follows the pointer on fine-pointer devices.
+  useCursorGlow();
 
   return (
     <>
+      <span className="cursor-glow" aria-hidden="true" />
+      <span className="grain" aria-hidden="true" />
+
       <a className="skip-link" href="#main">
         Skip to content
       </a>

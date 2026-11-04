@@ -6,6 +6,94 @@
   display: grid;
   gap: clamp(1rem, 0.8rem + 1vw, 1.75rem);
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  align-items: stretch;
+}
+
+/* ---------- "More on GitHub" teaser ---------- */
+
+.project-teaser {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: clamp(1.5rem, 1.2rem + 1vw, 2.25rem);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(22rem 16rem at 100% 0%, rgba(155, 108, 255, 0.16), transparent 68%),
+    radial-gradient(18rem 14rem at 0% 100%, rgba(76, 141, 255, 0.12), transparent 70%),
+    var(--surface);
+  overflow: hidden;
+  transition:
+    border-color var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+
+.project-teaser:hover {
+  transform: translateY(-4px);
+  border-color: var(--lav-400);
+  box-shadow: var(--shadow-glow);
+}
+
+.project-teaser__kicker {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue-300);
+}
+
+.project-teaser__title {
+  font-size: var(--fs-h3);
+  max-width: 18ch;
+  line-height: 1.18;
+}
+
+.project-teaser__text {
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  max-width: 40ch;
+}
+
+.project-teaser__link {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.35rem;
+}
+
+.project-teaser__art {
+  position: absolute;
+  right: -1.5rem;
+  bottom: -1.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 3.4rem);
+  gap: 0.5rem;
+  rotate: -10deg;
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+.project-teaser__tile {
+  aspect-ratio: 1;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: var(--grad-accent-soft);
+  backdrop-filter: blur(4px);
+}
+
+.project-teaser__tile:nth-child(2) {
+  translate: 0 0.6rem;
+}
+
+.project-teaser__tile:nth-child(3) {
+  translate: 0.6rem 0;
+}
+
+@media (min-width: 900px) {
+  .projects__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .projects__note {

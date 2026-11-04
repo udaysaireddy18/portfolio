@@ -13,6 +13,9 @@ const YEAR = new Date().getFullYear();
 export function Footer() {
   return (
     <footer className="footer">
+      <span className="footer__watermark" aria-hidden="true">
+        UDAY
+      </span>
       <div className="container">
         <div className="footer__top glass reveal">
           <div className="footer__brand">

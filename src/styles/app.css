@@ -15,7 +15,13 @@ main > section + section::before {
   position: absolute;
   inset: 0 var(--gutter) auto;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(107, 182, 255, 0.22),
+    rgba(155, 108, 255, 0.24),
+    transparent
+  );
   background-size: 200% 100%;
   animation: divider-sheen 9s var(--ease-in-out) infinite;
   pointer-events: none;
